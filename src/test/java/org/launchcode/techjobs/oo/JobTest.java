@@ -44,4 +44,46 @@ public class JobTest {
         assertFalse(jobFour.getId() == jobFive.getId());
     }
 
+
+    @Test
+    public void testToStringStartsAndEndsWithNewLine() {
+        Job jobSix = new Job("Student IA", new Employer("LaunchCode"), new Location("STL"), new PositionType("IA"), new CoreCompetency("Persistence"));
+        String newline = System.lineSeparator();
+
+        assertEquals(true, jobSix.toString().startsWith(newline));
+        assertEquals(true, jobSix.toString().endsWith(newline));
+    }
+
+
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+        Job jobSix = new Job("Student IA", new Employer("LaunchCode"), new Location("STL"), new PositionType("IA"), new CoreCompetency("Persistence"));
+
+        assertTrue(jobSix.toString().contains("ID: " + jobSix.getId()));
+        assertTrue(jobSix.toString().contains("Name: " + jobSix.getName()));
+        assertTrue(jobSix.toString().contains("Employer: " + jobSix.getEmployer()));
+        assertTrue(jobSix.toString().contains("Location: " + jobSix.getLocation()));
+        assertTrue(jobSix.toString().contains("Position Type: " + jobSix.getPositionType()));
+        assertTrue(jobSix.toString().contains("Core Competency: " + jobSix.getCoreCompetency()));
+    }
+
+
+    @Test
+    public void testToStringHandlesEmptyField() {
+        Job jobSix = new Job("Student IA", new Employer(""), new Location("STL"), new PositionType("IA"), new CoreCompetency("Persistence"));
+        String newline = System.lineSeparator();
+
+//        String expected = "\nID: 1\nName: Student IA\nEmployer: \nLocation: STL\nPosition Type: IA\nCore Competency: Persistence\n";
+        String expected = newline +
+                "ID: " + jobSix.getId() + newline +
+                "Name: Student IA" + newline +
+                "Employer: Data not available" + newline +
+                "Location: STL" + newline +
+                "Position Type: IA" + newline +
+                "Core Competency: Persistence" + newline;
+
+        assertEquals(expected, jobSix.toString());
+
+    }
+
 }

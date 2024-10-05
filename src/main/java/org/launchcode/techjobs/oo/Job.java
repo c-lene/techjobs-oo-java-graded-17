@@ -1,5 +1,7 @@
 package org.launchcode.techjobs.oo;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Job {
@@ -52,7 +54,38 @@ public class Job {
     }
 
 
-    
+
+    // Override Method for toString()
+
+    @Override
+    public String toString() {
+        String newline = System.lineSeparator();
+        String emptyField = "Data not available";
+
+        ArrayList<String> jobFields = new ArrayList<>();
+        jobFields.add(name);
+        jobFields.add(employer.toString());
+        jobFields.add(location.toString());
+        jobFields.add(positionType.toString());
+        jobFields.add(coreCompetency.toString());
+
+        for (String field : jobFields) {
+            if (field.isBlank()) {
+                jobFields.set(jobFields.indexOf(field), emptyField);
+            }
+        }
+
+        return newline +
+                "ID: " + id + newline +
+                "Name: " + jobFields.get(0) + newline +
+                "Employer: " + jobFields.get(1) + newline +
+                "Location: " + jobFields.get(2) + newline +
+                "Position Type: " + jobFields.get(3) + newline +
+                "Core Competency: " + jobFields.get(4) + newline;
+    }
+
+
+
     // TODO: Add getters for each field EXCEPT nextId.
     //  Add setters for each field EXCEPT nextID and id.
 
@@ -99,4 +132,10 @@ public class Job {
     public int getId() {
         return id;
     }
+
+
+
+
+
+
 }

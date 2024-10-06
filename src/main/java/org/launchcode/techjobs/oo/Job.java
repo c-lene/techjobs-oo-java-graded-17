@@ -62,6 +62,7 @@ public class Job {
         String newline = System.lineSeparator();
         String emptyField = "Data not available";
 
+        // Added each field to an ArrayList to be able to check each component later
         ArrayList<String> jobFields = new ArrayList<>();
         jobFields.add(name);
         jobFields.add(employer.toString());
@@ -69,7 +70,10 @@ public class Job {
         jobFields.add(positionType.toString());
         jobFields.add(coreCompetency.toString());
 
+        // Uses a For-Each Loop to check each Field if blank
         for (String field : jobFields) {
+
+            // If field is blank, will return "Data not available" in place of empty field
             if (field.isBlank()) {
                 jobFields.set(jobFields.indexOf(field), emptyField);
             }
